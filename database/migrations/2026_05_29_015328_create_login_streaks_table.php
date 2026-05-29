@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('login_streaks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
+            $table->unsignedInteger('current_streak')->default(0);
+            $table->unsignedInteger('longest_streak')->default(0);
+            $table->date('last_login_date')->nullable();
+            $table->date('streak_broken_at')->nullable();
             $table->timestamps();
         });
     }
